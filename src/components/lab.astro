@@ -1,0 +1,52 @@
+---
+
+interface LabCategory {
+  emoji: string;
+  title: string;
+  description: string;
+}
+
+const categories: LabCategory[] = [
+  {
+    emoji: "🤖",
+    title: "AI 实验",
+    description: "测试各种 AI 工具、模型和自动化方案，记录实测效果与对比。",
+  },
+  {
+    emoji: "☁",
+    title: "云服务实验",
+    description: "Cloudflare、Vercel、服务器部署等云服务的实际应用和踩坑记录。",
+  },
+  {
+    emoji: "🐳",
+    title: "自托管实验",
+    description: "Docker 部署、开源服务自托管，探索脱离第三方服务的可能性。",
+  },
+  {
+    emoji: "🔐",
+    title: "安全实验",
+    description: "隐私工具、账号安全实践，提升数字生活的安全性和可控性。",
+  },
+];
+---
+
+<section id="lab" class="py-16 md:py-24 border-t border-[#ffffff08] fade-in">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-lg text-[var(--sec)] mb-2 font-medium shiny-sec">Lab</h2>
+    <h3 class="text-3xl md:text-4xl font-semibold text-[var(--white)] mb-8">
+      实验记录
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        categories.map((cat) => (
+          <div class="bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 md:p-8 hover:border-[var(--sec)]/20 transition-all duration-300 card-glow">
+            <div class="text-3xl mb-4">{cat.emoji}</div>
+            <h4 class="text-xl font-semibold text-[var(--white)] mb-2">{cat.title}</h4>
+            <p class="text-sm text-[var(--white-icon)] leading-relaxed">{cat.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

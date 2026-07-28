@@ -1,0 +1,88 @@
+---
+
+interface ContentEntry {
+  emoji: string;
+  title: string;
+  description: string;
+  link: string;
+  linkText: string;
+}
+
+const entries: ContentEntry[] = [
+  {
+    emoji: "📚",
+    title: "博客",
+    description: "深度教程和技术文章",
+    link: "https://cunzhangblog.com",
+    linkText: "cunzhangblog.com",
+  },
+  {
+    emoji: "🎬",
+    title: "YouTube",
+    description: "视频教程和工具实测",
+    link: "https://youtube.com/@cunzhanglab",
+    linkText: "youtube.com/@cunzhanglab",
+  },
+  {
+    emoji: "📺",
+    title: "B站",
+    description: "中文视频教程和实测",
+    link: "https://space.bilibili.com/1224034462",
+    linkText: "space.bilibili.com",
+  },
+  {
+    emoji: "🧰",
+    title: "资源导航站",
+    description: "工具和资源集合",
+    link: "https://cunzhangai.com",
+    linkText: "cunzhangai.com",
+  },
+];
+---
+
+<section id="content" class="py-16 md:py-24 border-t border-[#ffffff08] fade-in">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-lg text-[var(--sec)] mb-2 font-medium shiny-sec">My Content</h2>
+    <h3 class="text-3xl md:text-4xl font-semibold text-[var(--white)] mb-8">
+      我的内容
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      {
+        entries.map((entry) => (
+          <a
+            href={entry.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 md:p-8 hover:border-[var(--sec)]/30 transition-all duration-300 block card-glow"
+          >
+            <div class="text-3xl mb-3">{entry.emoji}</div>
+            <h4 class="text-xl font-semibold text-[var(--white)] mb-2 group-hover:text-[var(--sec)] transition-colors">
+              {entry.title}
+            </h4>
+            <p class="text-sm text-[var(--white-icon)] mb-3">{entry.description}</p>
+            <span class="text-xs text-[var(--sec)]">{entry.linkText}</span>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 md:p-8 card-glow">
+      <h4 class="text-lg font-semibold text-[var(--white)] mb-3">GitHub</h4>
+      <p class="text-sm text-[var(--white-icon)] mb-4">
+        查看我的开源项目和代码实验
+      </p>
+      <a
+        href="https://github.com/cunzhangcrypto"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-sm text-[var(--sec)] hover:text-[var(--accent)] transition-colors"
+      >
+        github.com/cunzhangcrypto
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+          <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,100 @@
+---
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+
+// 按文件名数字排序（1.md → 1, 2.md → 2 …）
+const sortedProjects = projects.sort((a, b) => {
+  const numA = parseInt(a.id.replace(".md", ""), 10);
+  const numB = parseInt(b.id.replace(".md", ""), 10);
+  return numA - numB;
+});
+
+// 判断是否为状态标签（带 * 后缀）
+function isStatusTag(tag: string) {
+  return tag.endsWith("*");
+}
+---
+
+<section id="projects" class="py-16 md:py-24 border-t border-[#ffffff08] fade-in">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-lg text-[var(--sec)] mb-2 font-medium shiny-sec">Featured Projects</h2>
+    <h3 class="text-3xl md:text-4xl font-semibold text-[var(--white)] mb-8">
+      精选项目
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        sortedProjects.map((project) => {
+          const normalTags = project.data.tags.filter((t) => !isStatusTag(t));
+          const statusTags = project.data.tags.filter((t) => isStatusTag(t));
+
+          return (
+            <div class="group bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 md:p-8 hover:border-[var(--sec)]/30 transition-all duration-300 card-glow">
+              <div class="flex flex-col h-full">
+                <h4 class="text-xl md:text-2xl font-semibold text-[var(--white)] mb-2 group-hover:text-[var(--sec)] transition-colors">
+                  {project.data.title}
+                </h4>
+                <p class="text-sm md:text-base text-[var(--white-icon)] leading-relaxed mb-4 flex-grow">
+                  {project.data.description}
+                </p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {
+                    statusTags.map((tag) => (
+                      <span class="text-xs px-3 py-1 rounded-full bg-[var(--sec)]/15 text-[var(--sec)] border border-[var(--sec)]/25 font-medium">
+                        {tag.slice(0, -1)}
+                      </span>
+                    ))
+                  }
+                  {
+                    normalTags.map((tag) => (
+                      <span class="text-xs px-3 py-1 rounded-full bg-[var(--white-icon-tr)] text-[var(--white-icon)] border border-[#ffffff08]">
+                        {tag}
+                      </span>
+                    ))
+                  }
+                </div>
+                <div class="flex gap-3 mt-auto">
+                  {
+                    project.data.github && (
+                      <a
+                        href={project.data.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 text-sm text-[var(--white-icon)] hover:text-[var(--sec)] transition-colors"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+                          <path d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z"></path>
+                        </svg>
+                        GitHub
+                      </a>
+                    )
+                  }
+                  {
+                  project.data.demo && (() => {
+                    const url = new URL(project.data.demo);
+                    const domain = url.hostname;
+                    return (
+                      <a
+                        href={project.data.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1.5 text-sm text-[var(--white-icon)] hover:text-[var(--sec)] transition-colors"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3.5">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                        {domain}
+                      </a>
+                    );
+                  })()
+                }
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

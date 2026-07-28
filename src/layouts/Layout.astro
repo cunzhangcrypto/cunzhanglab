@@ -1,0 +1,196 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{title} | Cunzhang Lab</title>
+    <meta
+      name="description"
+      content="探索 AI 工具、开源项目与互联网技术实践，记录真实测试、部署过程和数字生产力探索。"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="canonical" href="https://czlab.dev/" />
+
+    <link
+      rel="preload"
+      href="/fonts/montserrat-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <meta property="og:title" content="村长实验室 | Cunzhang Lab" />
+    <meta
+      property="og:description"
+      content="探索 AI 工具、开源项目与互联网技术实践，记录真实测试、部署过程和数字生产力探索。"
+    />
+    <meta
+      property="og:image"
+      content="https://czlab.dev/og.image.png"
+    />
+    <meta property="og:url" content="https://czlab.dev" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="村长实验室 | Cunzhang Lab" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Web3村长",
+        "alternateName": "Cunzhang",
+        "url": "https://czlab.dev",
+        "image": "https://czlab.dev/og.image.png",
+        "sameAs": [
+          "https://github.com/cunzhangcrypto",
+          "https://cunzhangblog.com",
+          "https://cunzhangai.com",
+          "https://youtube.com/@cunzhanglab",
+          "https://twitter.com/web3cun",
+          "https://space.bilibili.com/1224034462"
+        ],
+        "jobTitle": "技术内容创作者",
+        "description": "中文互联网技术内容创作者，专注 AI 工具、开源项目与数字生产力探索。"
+      }
+    </script>
+  </head>
+  <body class="bg-[--background] sm:px-28 lg:px-20 px-9 relative">
+    <!-- 科技网格背景 -->
+    <div class="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(74,158,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(74,158,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(74,158,255,0.06)_0%,transparent_60%)]"></div>
+    </div>
+    <div class="relative z-10">
+      <slot />
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  @font-face {
+    font-family: "Montserrat Variable";
+    src: url("/fonts/montserrat-latin-wght-normal.woff2")
+      format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --background: #070708;
+    --sec: #4a9eff;
+    --accent: #00d4ff;
+    --glow: rgba(74, 158, 255, 0.15);
+    --white: #e8e8e8;
+    --white-icon: #8a8a8a98;
+    --white-icon-tr: #8a8a8a10;
+  }
+
+  * {
+    font-family:
+      "Montserrat Variable",
+      -apple-system,
+      system-ui,
+      sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  *::selection {
+    background-color: var(--sec);
+    color: var(--background);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* 全局渐入动画 */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 发光文字 */
+  .text-glow {
+    text-shadow: 0 0 40px rgba(74, 158, 255, 0.3),
+                 0 0 80px rgba(74, 158, 255, 0.1);
+  }
+
+  /* 发光边框卡片 */
+  .card-glow {
+    position: relative;
+    transition: all 0.4s ease;
+  }
+
+  .card-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(74,158,255,0), rgba(74,158,255,0.1), rgba(0,212,255,0), rgba(74,158,255,0));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    padding: 1px;
+  }
+
+  .card-glow:hover::before {
+    opacity: 1;
+  }
+
+  .card-glow:hover {
+    border-color: rgba(74, 158, 255, 0.2) !important;
+    box-shadow: 0 0 30px rgba(74, 158, 255, 0.06);
+  }
+
+  /* 渐变色分隔 */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(74, 158, 255, 0.15), transparent);
+  }
+
+  /* Scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 10px;
+    border: 2px solid var(--background);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #222 var(--background);
+  }
+</style>

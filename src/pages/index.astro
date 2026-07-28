@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/nav.astro";
+import Home from "@/components/home.astro";
+import About from "@/components/about.astro";
+import Projects from "@/components/projects.astro";
+import Lab from "@/components/lab.astro";
+import Uses from "@/components/uses.astro";
+import Content from "@/components/content.astro";
+import Contact from "@/components/contact.astro";
+import Footer from "@/components/footer.astro";
+---
+
+<Layout title="村长实验室">
+  <Nav />
+  <Home />
+  <About />
+  <Projects />
+  <Lab />
+  <Uses />
+  <Content />
+  <Contact />
+  <Footer />
+</Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+  });
+</script>
