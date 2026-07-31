@@ -9,6 +9,14 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="zh-CN">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-TQS4BPYE0F"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TQS4BPYE0F');
+    </script>
     <meta charset="UTF-8" />
     <title>{title} | Cunzhang Lab</title>
     <meta
