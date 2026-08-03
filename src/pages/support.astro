@@ -1,0 +1,237 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import supportersRaw from "@/data/supporters.md?raw";
+
+// 从 Markdown 解析支持者记录（每行：名称 | 金额 | 币种 | 支付方式，`- ` 前缀可选）
+const supporters = supportersRaw
+  .split("\n")
+  .map((line) => line.trim().replace(/^- /, ""))
+  .filter((line) => line.length > 0 && !line.startsWith("#") && !line.startsWith(">"))
+  .map((line) => {
+    const [name, amount, currency, method] = line
+      .split("|")
+      .map((s) => s.trim());
+    if (!amount || isNaN(Number(amount))) return null;
+    return { name, amount: Number(amount), currency, method };
+  })
+  .filter(Boolean);
+
+// 根据支付方式匹配图标
+function methodIcon(method: string) {
+  const m = method.toLowerCase();
+  if (m.includes("微信") || m.includes("wechat") || m.includes("wx")) return "/assets/wx_icon.png";
+  if (m.includes("支付宝") || m.includes("alipay") || m.includes("ali")) return "/assets/ali_icon.png";
+  if (m.includes("bep") || m.includes("bsc")) return "/assets/bep_icon.png";
+  if (m.includes("trc") || m.includes("tron")) return "/assets/trc_icon.png";
+  return "";
+}
+
+const benefits = [
+  "维护服务器",
+  "支付 API 服务费用",
+  "持续开发新功能",
+  "维护开源项目",
+];
+
+const qrChannels = [
+  {
+    icon: "/assets/wx_icon.png",
+    qr: "/assets/wechat.png",
+    name: "微信",
+    desc: "微信扫码赞赏",
+  },
+  {
+    icon: "/assets/ali_icon.png",
+    qr: "/assets/alipay.png",
+    name: "支付宝",
+    desc: "支付宝扫码赞赏",
+  },
+  {
+    icon: "/assets/bep_icon.png",
+    qr: "/assets/bep20.png",
+    name: "USDT (BEP20)",
+    desc: "BSC 链 USDT 转账",
+  },
+  {
+    icon: "/assets/trc_icon.png",
+    qr: "/assets/usdt.png",
+    name: "USDT (TRC20)",
+    desc: "TRON 链 USDT 转账",
+  },
+];
+---
+
+<Layout title="支持 Cunzhang Lab 开源项目">
+  <main class="max-w-5xl mx-auto w-full pt-28 md:pt-36 pb-24 px-9 sm:px-28 lg:px-20">
+    <!-- 标题 -->
+    <div class="text-left space-y-6 fade-in visible">
+      <p class="text-sm md:text-base text-[var(--sec)] font-medium tracking-[0.2em] uppercase">
+        Support
+      </p>
+      <h1 class="text-4xl md:text-6xl font-semibold text-[var(--white)] leading-tight tracking-tight text-glow">
+        支持 Cunzhang Lab
+      </h1>
+      <p class="text-md md:text-xl text-[var(--white-icon)] leading-relaxed max-w-2xl">
+        感谢你使用我的开源项目。
+      </p>
+    </div>
+
+    <!-- 你的支持会帮助 -->
+    <section class="mt-14 fade-in">
+      <h2 class="text-xl md:text-2xl font-semibold text-[var(--white)] mb-6">
+        你的支持会帮助我：
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {
+          benefits.map((item) => (
+            <div
+              class="flex items-center gap-3 bg-[#0d0d0d] border border-[#ffffff08] rounded-xl px-5 py-4 card-glow"
+            >
+              <span class="text-[var(--sec)] text-lg">✓</span>
+              <span class="text-[var(--white-icon)]">{item}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- 支持方式 -->
+    <section class="mt-16 fade-in">
+      <h2 class="text-xl md:text-2xl font-semibold text-[var(--white)] mb-6">
+        支持方式
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {
+          qrChannels.map((channel) => (
+            <div
+              class="bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 text-center hover:border-[var(--sec)]/30 transition-all duration-300 card-glow"
+            >
+              <img
+                src={channel.icon}
+                alt={channel.name}
+                class="w-10 h-10 mx-auto mb-3"
+              />
+              <h3 class="text-lg font-semibold text-[var(--white)] mb-1">
+                {channel.name}
+              </h3>
+              <p class="text-sm text-[var(--white-icon)] mb-4">{channel.desc}</p>
+              <img
+                src={channel.qr}
+                alt={`${channel.name} 收款码`}
+                class="w-36 h-auto mx-auto rounded-xl border border-[#ffffff08] cursor-zoom-in transition-transform duration-300 hover:scale-105"
+                data-lightbox
+              />
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- 感谢支持 -->
+    <section class="mt-16 fade-in">
+      <h2 class="text-xl md:text-2xl font-semibold text-[var(--white)] mb-6">
+        感谢支持
+      </h2>
+      <p class="text-[var(--white-icon)] leading-relaxed mb-6">
+        所有支持者都会记录在：
+      </p>
+      <div class="bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 md:p-8 card-glow">
+        <h3 class="text-lg font-semibold text-[var(--sec)] mb-4">
+          Cunzhang Lab Supporters
+        </h3>
+        {
+          supporters.length > 0 ? (
+            <ul class="space-y-3">
+              {
+                supporters.map((s, i) => {
+                  const icon = methodIcon(s.method);
+                  return (
+                    <li
+                      class="flex items-center justify-between gap-4 text-sm border-b border-[#ffffff08] pb-3 last:border-none last:pb-0"
+                    >
+                      <div class="flex items-center gap-3 min-w-0">
+                        {icon ? (
+                          <img
+                            src={icon}
+                            alt={s.method}
+                            class="w-7 h-7 rounded-full flex-shrink-0"
+                          />
+                        ) : (
+                          <span class="flex items-center justify-center w-7 h-7 rounded-full bg-[var(--sec)]/15 text-[var(--sec)] font-semibold flex-shrink-0">
+                            {s.name.slice(0, 1).toUpperCase()}
+                          </span>
+                        )}
+                        <span class="text-[var(--white)] truncate">{s.name}</span>
+                      </div>
+                      <div class="flex items-center gap-4 text-right flex-shrink-0">
+                        <span class="text-[var(--sec)] font-medium whitespace-nowrap">
+                          {s.amount} {s.currency}
+                        </span>
+                      </div>
+                    </li>
+                  );
+                })
+              }
+            </ul>
+          ) : (
+            <p class="text-sm text-[var(--white-icon)]/60">
+              暂无支持者记录。支持后你的名字会出现在这里。
+            </p>
+          )
+        }
+      </div>
+    </section>
+
+    <div class="mt-16">
+      <a href="/" class="text-sm text-[var(--sec)] hover:text-[var(--accent)] transition-colors">
+        ← 返回首页
+      </a>
+    </div>
+  </main>
+
+  <!-- 收款码放大预览 -->
+  <dialog
+    id="lightbox"
+    class="bg-transparent border-none p-0 m-auto cursor-zoom-out"
+  >
+    <img
+      id="lightbox-img"
+      alt="收款码放大"
+      class="max-w-[85vw] max-h-[85vh] rounded-xl"
+    />
+  </dialog>
+</Layout>
+
+<script>
+  const lightbox = document.getElementById("lightbox") as HTMLDialogElement;
+  const lightboxImg = document.getElementById("lightbox-img") as HTMLImageElement;
+
+  document.querySelectorAll("[data-lightbox]").forEach((el) => {
+    const img = el as HTMLImageElement;
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightbox.showModal();
+    });
+  });
+
+  lightbox.addEventListener("click", () => lightbox.close());
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox.open) lightbox.close();
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+  });
+</script>
