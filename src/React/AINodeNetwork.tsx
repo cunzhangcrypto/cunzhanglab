@@ -114,7 +114,7 @@ const AINodeNetwork = () => {
       posArr[i * 3] = nodes[i].pos.x;
       posArr[i * 3 + 1] = nodes[i].pos.y;
       sizArr[i] = nodes[i].size;
-      const c = new THREE.Color().setHSL(0.58, 0.7, 0.5 + Math.random() * 0.3);
+      const c = new THREE.Color().setHSL(0.07 + Math.random() * 0.6, 0.65, 0.55 + Math.random() * 0.2);
       colArr[i * 3] = c.r; colArr[i * 3 + 1] = c.g; colArr[i * 3 + 2] = c.b;
     }
     const ptGeom = new THREE.BufferGeometry();
@@ -122,8 +122,8 @@ const AINodeNetwork = () => {
     ptGeom.setAttribute("size", new THREE.BufferAttribute(sizArr, 1));
     ptGeom.setAttribute("color", new THREE.BufferAttribute(colArr, 3));
     const ptMat = new THREE.PointsMaterial({
-      size: 4, map: particleTex, transparent: true, opacity: 0.85,
-      blending: THREE.AdditiveBlending, depthWrite: false,
+      size: 4, map: particleTex, transparent: true, opacity: 0.9,
+      depthWrite: false,
       sizeAttenuation: true, vertexColors: true,
     });
     const points = new THREE.Points(ptGeom, ptMat);
@@ -137,8 +137,8 @@ const AINodeNetwork = () => {
     lGeom.setAttribute("position", new THREE.BufferAttribute(lPos, 3));
     lGeom.setAttribute("color", new THREE.BufferAttribute(lCol, 3));
     const lMat = new THREE.LineBasicMaterial({
-      vertexColors: true, transparent: true, opacity: 0.3,
-      blending: THREE.AdditiveBlending, depthWrite: false,
+      vertexColors: true, transparent: true, opacity: 0.5,
+      depthWrite: false,
     });
     const lines = new THREE.LineSegments(lGeom, lMat);
     scene.add(lines);
@@ -148,8 +148,8 @@ const AINodeNetwork = () => {
     const pGeom = new THREE.BufferGeometry();
     pGeom.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
     const pMat = new THREE.LineBasicMaterial({
-      color: 0x00d4ff, transparent: true, opacity: 0,
-      blending: THREE.AdditiveBlending, depthWrite: false,
+      color: 0x2563eb, transparent: true, opacity: 0,
+      depthWrite: false,
     });
     const pLine = new THREE.LineSegments(pGeom, pMat);
     scene.add(pLine);
@@ -228,8 +228,8 @@ const AINodeNetwork = () => {
           lp[i * 6] = na.pos.x; lp[i * 6 + 1] = na.pos.y; lp[i * 6 + 2] = 0;
           lp[i * 6 + 3] = nb.pos.x; lp[i * 6 + 4] = nb.pos.y; lp[i * 6 + 5] = 0;
           const a = c.alpha * 3;
-          lc[i * 6] = 0.29 * a; lc[i * 6 + 1] = 0.62 * a; lc[i * 6 + 2] = a;
-          lc[i * 6 + 3] = 0.29 * a; lc[i * 6 + 4] = 0.62 * a; lc[i * 6 + 5] = a;
+          lc[i * 6] = 0.55 * a; lc[i * 6 + 1] = 0.36 * a; lc[i * 6 + 2] = 0.96 * a;
+          lc[i * 6 + 3] = 0.55 * a; lc[i * 6 + 4] = 0.36 * a; lc[i * 6 + 5] = 0.96 * a;
         } else {
           for (let k = 0; k < 6; k++) { lp[i * 6 + k] = 0; lc[i * 6 + k] = 0; }
         }
@@ -333,9 +333,9 @@ const AINodeNetwork = () => {
               transform: `translate(-50%, -50%) scale(${scale})`,
               opacity,
               textShadow: opacity > 0.5
-                ? `0 0 ${20 * opacity}px rgba(74,158,255,${0.5 * opacity}), 0 0 ${40 * opacity}px rgba(74,158,255,${0.2 * opacity})`
+                ? `0 0 ${18 * opacity}px rgba(139,92,246,${0.35 * opacity}), 0 0 ${36 * opacity}px rgba(139,92,246,${0.15 * opacity})`
                 : "none",
-              color: "#e8e8e8",
+              color: "#111827",
               fontSize: "clamp(12px, 1.8vw, 22px)",
               fontWeight: 500,
               letterSpacing: "0.06em",

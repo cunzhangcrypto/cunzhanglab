@@ -30,7 +30,7 @@ const categories: LabCategory[] = [
 ];
 ---
 
-<section id="lab" class="py-16 md:py-24 border-t border-[#ffffff08] fade-in">
+<section id="lab" class="py-16 md:py-24 border-t border-[var(--border)] fade-in">
   <div class="max-w-5xl mx-auto">
     <h2 class="text-lg text-[var(--sec)] mb-2 font-medium shiny-sec">Lab</h2>
     <h3 class="text-3xl md:text-4xl font-semibold text-[var(--white)] mb-8">
@@ -40,8 +40,8 @@ const categories: LabCategory[] = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {
         categories.map((cat) => (
-          <div class="bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 md:p-8 hover:border-[var(--sec)]/20 transition-all duration-300 card-glow">
-            <div class="text-3xl mb-4">{cat.emoji}</div>
+          <div class="bg-white border border-[#eceef1] rounded-2xl p-6 md:p-8 shadow-[0_8px_32px_rgba(15,23,42,0.06)] hover:border-[var(--sec)]/20 hover:-translate-y-1 transition-all duration-300 card-glow">
+            <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#ff8659] via-[#8b5cf6] to-[#2563eb] text-xl mb-4 shadow-md shadow-[#8b5cf6]/20 ring-1 ring-black/5">{cat.emoji}</div>
             <h4 class="text-xl font-semibold text-[var(--white)] mb-2">{cat.title}</h4>
             <p class="text-sm text-[var(--white-icon)] leading-relaxed">{cat.description}</p>
           </div>

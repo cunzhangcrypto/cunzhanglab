@@ -72,10 +72,9 @@ const { title } = Astro.props;
     </script>
   </head>
   <body class="bg-[--background] sm:px-28 lg:px-20 px-9 relative">
-    <!-- 科技网格背景 -->
+    <!-- 柔和极光氛围背景（橙 → 紫 → 蓝） -->
     <div class="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
-      <div class="absolute inset-0 bg-[linear-gradient(rgba(74,158,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(74,158,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(74,158,255,0.06)_0%,transparent_60%)]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(1100px_560px_at_12%_-5%,rgba(255,138,91,0.22)_0%,transparent_62%),radial-gradient(1000px_520px_at_88%_8%,rgba(37,99,235,0.16)_0%,transparent_62%),radial-gradient(900px_600px_at_50%_95%,rgba(139,92,246,0.12)_0%,transparent_55%)]"></div>
     </div>
     <div class="relative z-10">
       <slot />
@@ -94,13 +93,15 @@ const { title } = Astro.props;
   }
 
   :root {
-    --background: #070708;
-    --sec: #4a9eff;
-    --accent: #00d4ff;
-    --glow: rgba(74, 158, 255, 0.15);
-    --white: #e8e8e8;
-    --white-icon: #8a8a8a98;
-    --white-icon-tr: #8a8a8a10;
+    --background: #fbfbfd;
+    --sec: #6d28d9;
+    --accent: #1555d9;
+    --glow: rgba(109, 40, 217, 0.12);
+    --white: #0f172a;
+    --white-icon: #6b7280;
+    --white-icon-tr: rgba(15, 23, 42, 0.06);
+    --border: rgba(15, 23, 42, 0.06);
+    --component-bg: rgba(255, 255, 255, 0.72);
   }
 
   * {
@@ -116,7 +117,7 @@ const { title } = Astro.props;
 
   *::selection {
     background-color: var(--sec);
-    color: var(--background);
+    color: #ffffff;
   }
 
   html {
@@ -137,8 +138,17 @@ const { title } = Astro.props;
 
   /* 发光文字 */
   .text-glow {
-    text-shadow: 0 0 40px rgba(74, 158, 255, 0.3),
-                 0 0 80px rgba(74, 158, 255, 0.1);
+    text-shadow: 0 0 40px rgba(139, 92, 246, 0.22),
+                 0 0 80px rgba(139, 92, 246, 0.1);
+  }
+
+  /* 渐变眉标文字 */
+  .shiny-sec {
+    background: linear-gradient(90deg, #ff8659, #8b5cf6, #1555d9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
   /* 发光边框卡片 */
@@ -152,7 +162,7 @@ const { title } = Astro.props;
     position: absolute;
     inset: -1px;
     border-radius: inherit;
-    background: linear-gradient(135deg, rgba(74,158,255,0), rgba(74,158,255,0.1), rgba(0,212,255,0), rgba(74,158,255,0));
+    background: linear-gradient(135deg, rgba(255,138,91,0), rgba(255,138,91,0.45), rgba(139,92,246,0.45), rgba(37,99,235,0.45), rgba(37,99,235,0));
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: -1;
@@ -166,15 +176,15 @@ const { title } = Astro.props;
   }
 
   .card-glow:hover {
-    border-color: rgba(74, 158, 255, 0.2) !important;
-    box-shadow: 0 0 30px rgba(74, 158, 255, 0.06);
+    border-color: rgba(139, 92, 246, 0.28) !important;
+    box-shadow: 0 10px 36px rgba(139, 92, 246, 0.14);
   }
 
   /* 渐变色分隔 */
   .section-divider {
     border: none;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(74, 158, 255, 0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.15), transparent);
   }
 
   /* Scrollbar styles */
@@ -183,22 +193,22 @@ const { title } = Astro.props;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--background);
+    background: #eef0f4;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #222;
+    background: #c9ced6;
     border-radius: 10px;
-    border: 2px solid var(--background);
+    border: 2px solid #eef0f4;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #333;
+    background: #a7aeba;
   }
 
   /* Firefox */
   * {
     scrollbar-width: thin;
-    scrollbar-color: #222 var(--background);
+    scrollbar-color: #c9ced6 #eef0f4;
   }
 </style>

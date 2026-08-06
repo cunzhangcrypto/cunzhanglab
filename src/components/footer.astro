@@ -3,8 +3,9 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="w-full py-12 border-t border-[#ffffff08] fade-in">
-  <div class="max-w-5xl mx-auto">
+<footer class="w-full py-12 fade-in">
+  <div class="h-px w-full bg-[linear-gradient(90deg,transparent,rgba(255,134,89,0.5),rgba(139,92,246,0.5),rgba(21,85,217,0.5),transparent)]"></div>
+  <div class="max-w-5xl mx-auto mt-10">
     <div class="flex flex-col items-center gap-8">
       <div class="flex space-x-6 sm:space-x-8">
         {
@@ -41,7 +42,7 @@ const currentYear = new Date().getFullYear();
               class="flex flex-col items-center group"
               aria-label={link.label}
             >
-              <div class="text-[#666] hover:text-[var(--sec)] transition duration-300 ease-in-out">
+              <div class="text-[var(--white-icon)] hover:text-[var(--sec)] transition duration-300 ease-in-out">
                 <div set:html={link.icon} />
               </div>
             </a>
@@ -50,14 +51,14 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <div class="text-center space-y-1">
-        <p class="text-sm text-[#999]">村长实验室</p>
-        <p class="text-xs text-[#666]">Cunzhang Lab</p>
-        <p class="text-xs text-[#555] mt-3">站长 · Web3村长</p>
+        <p class="text-sm text-[var(--white)]">村长实验室</p>
+        <p class="text-xs text-[var(--white-icon)]">Cunzhang Lab</p>
+        <p class="text-xs text-[var(--white-icon)]/80 mt-3">站长 · Web3村长</p>
       </div>
     </div>
 
-    <div class="mt-8 pt-6 border-t border-[#ffffff08]">
-      <p class="text-center text-xs text-[#555]">
+    <div class="mt-8 pt-6 border-t border-[var(--border)]">
+      <p class="text-center text-xs text-[var(--white-icon)]/70">
         Copyright © {currentYear} Web3村长. All rights reserved.
       </p>
     </div>

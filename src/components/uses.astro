@@ -21,7 +21,7 @@ const categories: ToolCategory[] = [
 ];
 ---
 
-<section id="uses" class="py-16 md:py-24 border-t border-[#ffffff08] fade-in">
+<section id="uses" class="py-16 md:py-24 border-t border-[var(--border)] fade-in">
   <div class="max-w-5xl mx-auto">
     <h2 class="text-lg text-[var(--sec)] mb-2 font-medium shiny-sec">Uses</h2>
     <h3 class="text-3xl md:text-4xl font-semibold text-[var(--white)] mb-8">
@@ -31,7 +31,7 @@ const categories: ToolCategory[] = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {
         categories.map((cat) => (
-          <div class="bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 md:p-8 card-glow">
+          <div class="bg-white border border-[#eceef1] rounded-2xl p-6 md:p-8 shadow-[0_8px_32px_rgba(15,23,42,0.06)] card-glow">
             <h4 class="text-lg font-semibold text-[var(--sec)] mb-4">{cat.title}</h4>
             <ul class="space-y-2">
               {

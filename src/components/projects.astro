@@ -16,7 +16,7 @@ function isStatusTag(tag: string) {
 }
 ---
 
-<section id="projects" class="py-16 md:py-24 border-t border-[#ffffff08] fade-in">
+<section id="projects" class="py-16 md:py-24 border-t border-[var(--border)] fade-in">
   <div class="max-w-5xl mx-auto">
     <h2 class="text-lg text-[var(--sec)] mb-2 font-medium shiny-sec">Featured Projects</h2>
     <h3 class="text-3xl md:text-4xl font-semibold text-[var(--white)] mb-8">
@@ -30,7 +30,7 @@ function isStatusTag(tag: string) {
           const statusTags = project.data.tags.filter((t) => isStatusTag(t));
 
           return (
-            <div class="group bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 md:p-8 hover:border-[var(--sec)]/30 transition-all duration-300 card-glow">
+            <div class="group bg-white border border-[#eceef1] rounded-2xl p-6 md:p-8 shadow-[0_8px_32px_rgba(15,23,42,0.06)] hover:border-[var(--sec)]/30 hover:-translate-y-1 transition-all duration-300 card-glow">
               <div class="flex flex-col h-full">
                 <h4 class="text-xl md:text-2xl font-semibold text-[var(--white)] mb-2 group-hover:text-[var(--sec)] transition-colors">
                   {project.data.title}
@@ -48,7 +48,7 @@ function isStatusTag(tag: string) {
                   }
                   {
                     normalTags.map((tag) => (
-                      <span class="text-xs px-3 py-1 rounded-full bg-[var(--white-icon-tr)] text-[var(--white-icon)] border border-[#ffffff08]">
+                      <span class="text-xs px-3 py-1 rounded-full bg-[var(--white-icon-tr)] text-[var(--white-icon)] border border-[var(--white-icon-tr)]">
                         {tag}
                       </span>
                     ))

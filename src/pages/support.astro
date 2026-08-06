@@ -85,7 +85,7 @@ const qrChannels = [
         {
           benefits.map((item) => (
             <div
-              class="flex items-center gap-3 bg-[#0d0d0d] border border-[#ffffff08] rounded-xl px-5 py-4 card-glow"
+              class="flex items-center gap-3 bg-white border border-[#eceef1] rounded-xl px-5 py-4 shadow-[0_6px_24px_rgba(15,23,42,0.05)] card-glow"
             >
               <span class="text-[var(--sec)] text-lg">✓</span>
               <span class="text-[var(--white-icon)]">{item}</span>
@@ -104,7 +104,7 @@ const qrChannels = [
         {
           qrChannels.map((channel) => (
             <div
-              class="bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 text-center hover:border-[var(--sec)]/30 transition-all duration-300 card-glow"
+              class="bg-white border border-[#eceef1] rounded-2xl p-6 text-center shadow-[0_8px_32px_rgba(15,23,42,0.06)] hover:border-[var(--sec)]/30 hover:-translate-y-1 transition-all duration-300 card-glow"
             >
               <img
                 src={channel.icon}
@@ -118,7 +118,7 @@ const qrChannels = [
               <img
                 src={channel.qr}
                 alt={`${channel.name} 收款码`}
-                class="w-36 h-auto mx-auto rounded-xl border border-[#ffffff08] cursor-zoom-in transition-transform duration-300 hover:scale-105"
+                class="w-36 h-auto mx-auto rounded-xl border border-[var(--white-icon-tr)] cursor-zoom-in transition-transform duration-300 hover:scale-105"
                 data-lightbox
               />
             </div>
@@ -135,7 +135,7 @@ const qrChannels = [
       <p class="text-[var(--white-icon)] leading-relaxed mb-6">
         所有支持者都会记录在：
       </p>
-      <div class="bg-[#0d0d0d] border border-[#ffffff08] rounded-2xl p-6 md:p-8 card-glow">
+      <div class="bg-white border border-[#eceef1] rounded-2xl p-6 md:p-8 shadow-[0_8px_32px_rgba(15,23,42,0.06)] card-glow">
         <h3 class="text-lg font-semibold text-[var(--sec)] mb-4">
           Cunzhang Lab Supporters
         </h3>
@@ -147,7 +147,7 @@ const qrChannels = [
                   const icon = methodIcon(s.method);
                   return (
                     <li
-                      class="flex items-center justify-between gap-4 text-sm border-b border-[#ffffff08] pb-3 last:border-none last:pb-0"
+                      class="flex items-center justify-between gap-4 text-sm border-b border-[var(--border)] pb-3 last:border-none last:pb-0"
                     >
                       <div class="flex items-center gap-3 min-w-0">
                         {icon ? (
